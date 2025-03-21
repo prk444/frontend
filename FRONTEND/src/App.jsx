@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css';
+import NavBar from './components/nav';
+import AddStudentDetail from './AddStudent';
 
 function StudentSearch() {
-  const [students, setStudents] = useState([]); // State to store the data from API
+  const [students, setStudents] = useState([]); 
   const [searchName, setSearchName] = useState('');
   const [filterGrade, setFilterGrade] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -61,4 +66,20 @@ function StudentSearch() {
   );
 }
 
-export default StudentSearch;
+function AddStudent() {
+  return <div>Add Student Page</div>;
+}
+
+function App() {
+  return (
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<StudentSearch />} />
+        <Route path="/add-student" element={<AddStudentDetail />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
